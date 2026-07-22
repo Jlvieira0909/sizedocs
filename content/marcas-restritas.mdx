@@ -1,0 +1,72 @@
+---
+title: "Marcas Restritas"
+description: "Como restringir o Provador Virtual a marcas específicas dentro de uma loja multimarca."
+category: "Configurações Avançadas"
+order: 6
+updatedAt: "2026-07-22"
+---
+
+Em lojas multimarca, o Provador Virtual pode ser restrito a marcas específicas. Antes de mostrar o provador, o widget confirma com a pessoa se ela usa a marca em questão:
+
+![Widget do provador perguntando se a pessoa usa os calçados da marca Manolita](/docs/marcas-restritas/widget-selecao-marca.png)
+
+Para isso funcionar, quatro coisas precisam estar configuradas: a logo da marca, o cadastro dela no MySizebay, um arquivo de configuração por tenant e uma flag ativando o recurso.
+
+## 1. Subir a logo
+
+Envie a logo para a pasta `brands/` do bucket `szb-tenants-production` (`szb-tenants-production/brands/`). O nome do arquivo deve ser o nome da marca — por exemplo, `nike.svg`.
+
+## 2. Cadastrar a marca no MySizebay
+
+Dentro do MySizebay, em **Customer Success → Marcas Sizebay**, adicione a nova marca:
+
+![Formulário Editar Marca Sizebay com nome, permalink, gênero, faixa etária e toggle Shoe](/docs/marcas-restritas/editar-marca-sizebay.png)
+
+<Callout type="tip" title="Permalink">
+O campo **Permalink** deve receber exatamente o nome do arquivo enviado no passo anterior — no exemplo, apenas `nike.svg`.
+</Callout>
+
+## 3. Encontrar o ID da marca
+
+Os IDs das marcas cadastradas podem ser vistos pela aba **Network** do navegador. Em **Customer Success → Marcas Sizebay**, pesquise pelo nome da loja e observe a resposta da requisição:
+
+![Aba Network do navegador mostrando o JSON de resposta com o id da marca](/docs/marcas-restritas/network-tab-brand-id.png)
+
+## 4. Criar o tenantConfiguration.json
+
+Crie um arquivo `tenantConfiguration.json` com as marcas que devem ser permitidas:
+
+```json
+{
+  "validBrands": [
+    {
+      "id": 6196,
+      "brandName": "Amati"
+    }
+  ],
+  "highligthedBrands": [
+    {
+      "id": 6196,
+      "brandName": "Amati"
+    }
+  ]
+}
+```
+
+## 5. Ativar a flag no config_v4.json
+
+No `config_v4.json` da loja, adicione:
+
+```json
+"restrictedBrands": true
+```
+
+## Onde hospedar o tenantConfiguration
+
+O arquivo deve ser enviado ao S3, dentro de uma pasta com o ID do tenant da loja. Para uma loja com tenant `4377`, o caminho é:
+
+![Caminho no S3: bucket conf-vfr-v3-production, pasta 4377](/docs/marcas-restritas/s3-pasta-tenant.png)
+
+<Callout type="warning" title="Fluxo novo de calçados (shoe)">
+Quando a marca restrita for aplicada no novo fluxo de shoe, ela precisa ser adicionada manualmente pelo time de produto. Nesse caso, a implantação deve passar a tabela da marca para o Victor, que repassa ao time de produto para a inclusão.
+</Callout>

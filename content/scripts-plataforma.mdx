@@ -1,0 +1,41 @@
+---
+title: "Inserindo o Script na Plataforma"
+description: "Como adicionar o script do Provador Virtual direto pelo painel nativo de cada plataforma."
+category: "Configurações Avançadas"
+order: 7
+updatedAt: "2026-07-22"
+---
+
+Algumas plataformas permitem adicionar o script do Provador Virtual direto pelo próprio gerenciador de scripts, sem precisar de GTM ou edição de tema. Esta página reúne o passo a passo por plataforma — novas plataformas podem ser adicionadas aqui conforme forem mapeadas.
+
+## Bagy
+
+No painel esquerdo, acesse **Loja Virtual → Scripts**:
+
+![Lista de scripts cadastrados na Bagy, incluindo Sizebay e Order tracking Sizebay](/docs/scripts-plataforma/bagy-lista-scripts.png)
+
+<Callout type="warning" title="Carrinho e checkout">
+Não é possível adicionar script nas páginas de carrinho e checkout — a própria Bagy avisa isso no formulário.
+</Callout>
+
+Clique em **Adicionar script** e preencha:
+
+| Campo | Valor |
+| --- | --- |
+| Nome do script | Sizebay |
+| Descrição | Provador Virtual |
+| Onde inserir na página | Cabeçalho |
+| Categoria do script | Essencial |
+| Tipo do script | URL |
+| Método de carregamento | Padrão |
+| Script URL | `https://static.sizebay.technology/{tenant_id}/prescript.js` |
+
+![Formulário de configuração do script Sizebay na Bagy](/docs/scripts-plataforma/bagy-config-script.png)
+
+Mais detalhes sobre o gerenciador de scripts da Bagy estão na [base de conhecimento da própria plataforma](https://basedeconhecimento.bagy.com.br/hc/pt-br/articles/21136026890132-Adicionando-Scripts-na-sua-loja-virtual).
+
+## Uoou
+
+1. Faça login na plataforma com a conta do cliente.
+2. No menu hambúrguer, acesse **Configurações → Configurações gerais**.
+3. Abra a aba **Scripts personalizados** e insira o código do prescript no final do código de rastreamento, dentro do `<head>`.

@@ -1,0 +1,45 @@
+---
+title: "Regras de Importação (MS)"
+description: "Como configurar regras de categorização de produtos no New My Sizebay."
+category: "Configurações Avançadas"
+order: 5
+updatedAt: "2026-07-22"
+---
+
+Assim que um produto é integrado à base — com nome, tamanhos, gênero etc. — ele pode ser manipulado por regras a partir do New My Sizebay (MS). Essas regras servem principalmente para categorizar produtos automaticamente a partir do nome.
+
+## Onde configurar
+
+No New My Sizebay, acesse a loja desejada e siga o caminho:
+
+**Configurações → Sincronização → Configurar regras de importação**
+
+![Painel de sincronização com o botão configurar regras de importação](/docs/regras-ms/sincronizacao-painel.png)
+
+Ao clicar em **Configurar regras de importação**, abre a tela com as regras já cadastradas para a loja.
+
+## Como uma regra funciona
+
+Uma regra combina condições sobre o **nome** do produto para decidir uma **categoria**. Por exemplo: se o nome contém "Bermuda" **e** contém "Regular", a categoria vira "BERMUDA REGULAR".
+
+![Grupos de regra combinando condições de nome com uma categoria de destino](/docs/regras-ms/grupos-de-regra.png)
+
+Um produto chamado "Camiseta Polo Listrada" pode ganhar uma regra para cair na categoria "CAMISETAS POLO" sempre que o nome contiver a palavra "Camiseta". Mas a regra por si só não é suficiente — ela só funciona de verdade se também existir uma **tabela de medidas cadastrada para essa categoria**, com tamanhos compatíveis com os do produto. Sem isso, o produto entra na categoria certa mas continua pendente no admin.
+
+<Callout type="warning" title="A categoria bater não é suficiente">
+Regra, categoria e tabela de medidas precisam estar alinhadas. Se qualquer uma dessas peças estiver fora do lugar, a integração do produto não se completa.
+</Callout>
+
+## Um exemplo real do problema
+
+O produto abaixo tem a categoria "CAMISA POLO", e existe uma categoria com exatamente esse nome — até aqui, tudo certo.
+
+![Produto com categoria CAMISA POLO e tamanhos numéricos 37 a 45](/docs/regras-ms/produto-categoria-match.png)
+
+O detalhe é que os tamanhos capturados do produto (37, 38, 39... 45) são numéricos, enquanto a tabela cadastrada para "CAMISA POLO" usa tamanhos em letra (P, M, G, GG, EXG):
+
+![Tabela de medidas da categoria CAMISA POLO com tamanhos em letra](/docs/regras-ms/tabela-medidas-1.png)
+
+![Continuação da tabela de medidas com os tamanhos G, GG e EXG](/docs/regras-ms/tabela-medidas-2.png)
+
+Como os tamanhos não têm correspondência, a regra não funciona de ponta a ponta — mesmo com a categoria certa. Todos os dados (nome, categoria e tamanho) precisam vir alinhados para que a integração funcione.
