@@ -1,0 +1,44 @@
+---
+title: "Guia Inicial"
+description: "Como esta documentação funciona e como adicionar novas páginas."
+category: "Primeiros Passos"
+order: 1
+updatedAt: "2026-07-22"
+---
+
+O SizeDocs reúne os guias de integração, as plataformas suportadas e os atalhos usados no dia a dia do time. Esta página explica como o site funciona por baixo dos panos, para quem for adicionar ou editar conteúdo.
+
+## Como o conteúdo é organizado
+
+Cada página vem de um arquivo `.mdx` dentro de `content/`. O nome do arquivo define a URL: `plataforms.mdx` fica acessível em `/docs/plataforms`.
+
+No topo de cada arquivo existe um bloco de frontmatter com os metadados da página:
+
+```
+---
+title: "Nome da página"
+description: "Uma frase curta sobre o conteúdo."
+category: "Nome do grupo na barra lateral"
+order: 1
+updatedAt: "2026-07-22"
+---
+```
+
+<Callout type="tip" title="Ordenação">
+O campo `order` controla a posição da página dentro do grupo — quanto menor, mais acima ela aparece na barra lateral.
+</Callout>
+
+## Componentes disponíveis
+
+Além de markdown comum, as páginas podem usar alguns componentes já prontos:
+
+- `Callout` com os tipos `info`, `tip` e `warning`, para destacar avisos como este.
+- `PlatformGrid` e `PlatformCard`, para montar a grade de plataformas suportadas (veja a página **Plataformas**).
+
+<Callout type="warning" title="Links externos">
+Links markdown comuns, como `[texto](url)`, já ganham ícone da plataforma, botão de copiar e opção de abrir em nova guia automaticamente. Não é preciso nenhuma marcação extra.
+</Callout>
+
+## Adicionando uma nova página
+
+Crie um arquivo em `content/nome-da-pagina.mdx` com o frontmatter acima e escreva o conteúdo normalmente. A página aparece automaticamente na barra lateral, na busca (`⌘K`) e na home — sem precisar editar nenhum outro arquivo.
